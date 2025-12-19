@@ -34,7 +34,10 @@ export const GiftCard = ({ gift }: GiftCardProps) => {
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <h3 className="font-display text-lg font-semibold text-foreground truncate">
+          <h3
+            className="font-display text-lg font-semibold text-foreground truncate"
+            title={gift.name}
+          >
             {gift.name}
           </h3>
           {gift.brand && (

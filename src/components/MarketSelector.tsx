@@ -8,21 +8,26 @@ import {
 } from "./ui/select";
 
 const MARKETS = [
-  { code: "AT", name: "Austria", flag: "🇦🇹" },
-  { code: "BE", name: "Belgium", flag: "🇧🇪" },
-  { code: "DK", name: "Denmark", flag: "🇩🇰" },
-  { code: "FI", name: "Finland", flag: "🇫🇮" },
-  { code: "FR", name: "France", flag: "🇫🇷" },
-  { code: "DE", name: "Germany", flag: "🇩🇪" },
-  { code: "IE", name: "Ireland", flag: "🇮🇪" },
-  { code: "IT", name: "Italy", flag: "🇮🇹" },
-  { code: "NL", name: "Netherlands", flag: "🇳🇱" },
-  { code: "NO", name: "Norway", flag: "🇳🇴" },
-  { code: "PL", name: "Poland", flag: "🇵🇱" },
-  { code: "ES", name: "Spain", flag: "🇪🇸" },
-  { code: "SE", name: "Sweden", flag: "🇸🇪" },
-  { code: "UK", name: "United Kingdom", flag: "🇬🇧" },
+  { code: "AT", name: "Austria", flag: "🇦🇹", currency: "EUR", symbol: "€" },
+  { code: "BE", name: "Belgium", flag: "🇧🇪", currency: "EUR", symbol: "€" },
+  { code: "DK", name: "Denmark", flag: "🇩🇰", currency: "DKK", symbol: "kr" },
+  { code: "FI", name: "Finland", flag: "🇫🇮", currency: "EUR", symbol: "€" },
+  { code: "FR", name: "France", flag: "🇫🇷", currency: "EUR", symbol: "€" },
+  { code: "DE", name: "Germany", flag: "🇩🇪", currency: "EUR", symbol: "€" },
+  { code: "IE", name: "Ireland", flag: "🇮🇪", currency: "EUR", symbol: "€" },
+  { code: "IT", name: "Italy", flag: "🇮🇹", currency: "EUR", symbol: "€" },
+  { code: "NL", name: "Netherlands", flag: "🇳🇱", currency: "EUR", symbol: "€" },
+  { code: "NO", name: "Norway", flag: "🇳🇴", currency: "NOK", symbol: "kr" },
+  { code: "PL", name: "Poland", flag: "🇵🇱", currency: "PLN", symbol: "zł" },
+  { code: "ES", name: "Spain", flag: "🇪🇸", currency: "EUR", symbol: "€" },
+  { code: "SE", name: "Sweden", flag: "🇸🇪", currency: "SEK", symbol: "kr" },
+  { code: "UK", name: "United Kingdom", flag: "🇬🇧", currency: "GBP", symbol: "£" },
 ];
+
+export const getMarketCurrency = (marketCode: string) => {
+  const market = MARKETS.find((m) => m.code === marketCode);
+  return market ? { currency: market.currency, symbol: market.symbol } : { currency: "EUR", symbol: "€" };
+};
 
 interface MarketSelectorProps {
   value: string;

@@ -7,7 +7,7 @@ import { GiftCard, GiftItem } from "@/components/GiftCard";
 import { ChatMessage } from "@/components/ChatMessage";
 import { ChatInput } from "@/components/ChatInput";
 import { LoadingMessages } from "@/components/LoadingMessages";
-import { MarketSelector } from "@/components/MarketSelector";
+import { MarketSelector, getMarketCurrency } from "@/components/MarketSelector";
 import { sendChatMessage, searchItems, PersonDescription, ChatMessage as ChatMessageType, ChatResponse } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 
@@ -218,7 +218,16 @@ const Index = () => {
             <h1 className="font-display text-5xl md:text-6xl font-bold text-foreground">
               Secret <span className="text-gradient-festive">Santa</span>
             </h1>
-            <TreePine className="w-12 h-12 text-christmas-green animate-float" style={{ animationDelay: "0.5s" }} />
+            <div className="animate-float">
+              <div
+                className="w-14 h-14 rounded-full flex items-center justify-center"
+                style={{
+                  background: "radial-gradient(circle, hsl(145 45% 28% / 0.7) 0%, hsl(145 45% 28% / 0.3) 50%, transparent 70%)"
+                }}
+              >
+                <img src="/android-chrome-192x192.png" alt="Opper" className="w-10 h-10" />
+              </div>
+            </div>
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-body">
             Find the perfect gift for everyone on your list!
@@ -283,6 +292,7 @@ const Index = () => {
                       onSubmit={handlePersonSubmit}
                       isLoading={isLoading}
                       initialValues={savedPersonForm || undefined}
+                      currencySymbol={getMarketCurrency(market).symbol}
                     />
                   </>
                 ) : (

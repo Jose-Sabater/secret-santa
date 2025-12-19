@@ -16,9 +16,10 @@ interface PersonFormProps {
   onSubmit: (data: PersonFormData) => void;
   isLoading: boolean;
   initialValues?: PersonFormData;
+  currencySymbol?: string;
 }
 
-export const PersonForm = ({ onSubmit, isLoading, initialValues }: PersonFormProps) => {
+export const PersonForm = ({ onSubmit, isLoading, initialValues, currencySymbol = "kr" }: PersonFormProps) => {
   const [name, setName] = useState(initialValues?.name || "");
   const [description, setDescription] = useState(initialValues?.description || "");
   const [interests, setInterests] = useState(initialValues?.interests || "");
@@ -83,26 +84,32 @@ export const PersonForm = ({ onSubmit, isLoading, initialValues }: PersonFormPro
       <div className="space-y-2">
         <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
           <Coins className="w-4 h-4 text-christmas-green" />
-          Budget range (optional)
+          Budget range in {currencySymbol} (optional)
         </label>
         <div className="flex gap-3 items-center">
-          <Input
-            type="number"
-            placeholder="Min"
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-            className="bg-background border-border focus:border-christmas-gold focus:ring-christmas-gold/20"
-            min={0}
-          />
+          <div className="relative flex-1">
+            <Input
+              type="number"
+              placeholder="Min"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+              className="bg-background border-border focus:border-christmas-gold focus:ring-christmas-gold/20 pr-8"
+              min={0}
+            />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">{currencySymbol}</span>
+          </div>
           <span className="text-muted-foreground">—</span>
-          <Input
-            type="number"
-            placeholder="Max"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-            className="bg-background border-border focus:border-christmas-gold focus:ring-christmas-gold/20"
-            min={0}
-          />
+          <div className="relative flex-1">
+            <Input
+              type="number"
+              placeholder="Max"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              className="bg-background border-border focus:border-christmas-gold focus:ring-christmas-gold/20 pr-8"
+              min={0}
+            />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">{currencySymbol}</span>
+          </div>
         </div>
         <p className="text-xs text-muted-foreground">Set a budget for Secret Santa gift exchanges</p>
       </div>

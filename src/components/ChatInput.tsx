@@ -12,7 +12,7 @@ interface ChatInputProps {
 export const ChatInput = ({
   onSend,
   isLoading,
-  placeholder = "Refine your search... (e.g., 'something cheaper' or 'more tech gadgets')",
+  placeholder = "Anything I didn't get right? (e.g., 'something cheaper' or 'more tech gadgets')",
 }: ChatInputProps) => {
   const [message, setMessage] = useState("");
 
