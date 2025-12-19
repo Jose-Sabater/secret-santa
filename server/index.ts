@@ -6,8 +6,10 @@ import { config } from "dotenv";
 import { chat, ChatMessage, GiftResponse } from "./agent.js";
 import { searchProducts, getOffers } from "./tools/pricerunner.js";
 
-// Load environment variables
-config();
+// Load environment variables from .env file (only in development)
+if (process.env.NODE_ENV !== "production") {
+  config();
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -136,7 +138,8 @@ Endpoints:
   GET  /api/health   - Health check
 
 Environment:
+  NODE_ENV:       ${process.env.NODE_ENV || "development"}
   KLARNA_API_KEY: ${process.env.KLARNA_API_KEY ? "✓ Set" : "✗ Missing"}
-  OPPER_API_KEY:  ${process.env.OPPER_API_KEY ? "✓ Set" : "✗ Missing"}
+  OPPER_API_KEY:  ${process.env.OPPER_API_KEY ? `✓ Set (${process.env.OPPER_API_KEY.slice(0, 8)}...)` : "✗ Missing"}
 `);
 });
